@@ -40,7 +40,6 @@ export const Navbar = ({inHome, inAdmin}) => {
             {goHome && <Navigate to="/" />}
             <Menubar model={items} start={logo} end={botones} />
         </div>
-        
     )
 }
 

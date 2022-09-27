@@ -1,23 +1,27 @@
-import React, { useState } from 'react';
-import { Image } from 'primereact/image';
+import React, { useState, useEffect } from 'react';
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
+import { PlatoService } from '../services/PlatoService';
+import { Skeleton } from 'primereact/skeleton';
 
-export const PlatoCard = () => {
+export const PlatoCard = ({parentOnClick}) => {
 
-    const [displayBasic, setDisplayBasic] = useState(false);
-    const dialogFuncMap = {
-        'displayBasic': setDisplayBasic
-    }
+    const [plato, setPlato] = useState({});
+    const [loading, setLoading] = useState(false);
 
-    const onClick = (name, position) => {
-        dialogFuncMap[`${name}`](true);
+    useEffect(() => {
 
-    }
+        async function getPlato(){
+            setLoading(true);
 
-    const onHide = (name) => {
-        dialogFuncMap[`${name}`](false);
-    }
+            const platoService = new PlatoService();
+            await platoService.getPlato().then( res => setPlato(res.data));
+
+            setLoading(false);
+        }
+
+        getPlato();
+    }, [])
 
     const renderFooter = () => {
         return (
@@ -27,15 +31,38 @@ export const PlatoCard = () => {
         );
     }
 
-    const title = <span className='text-primary'>Titulo super ultra largo</span>
-    
-    return(
-        <div className='flex flex-grow-1 justify-content-center align-items-center'>
+    function capitalizeFirstLetter( palabra ) {
+        let string = palabra || "";
+        string = string.toLowerCase();
+        const toReturn = string.charAt(0).toUpperCase() + string.slice(1);
+        return toReturn;
+    }
 
-            <Button onClick={() => onClick("displayBasic")} label="Buscar plato aleatorio" icon="pi pi-search " />
-            <Dialog visible={displayBasic} onHide={() => onHide("displayBasic")} header={title} resizable={false} draggable={false} footer={renderFooter()}>
-                <Image src='https://via.placeholder.com/400x300'></Image>
-            </Dialog>
-        </div>
+    const skeletonDialog = (
+        <Dialog visible={loading} resizable={false} closable={false} draggable={false} header={<Skeleton width='20rem' height='2rem' className='mr-3' ></Skeleton>}
+        breakpoints={{'960px': '75vw', '640px': '100vw'}} style={{width: '25vw'}}>
+            <Skeleton className="mb-2"></Skeleton>
+            <Skeleton width="10vw" className="mb-2"></Skeleton>
+            <Skeleton width="5vw" className="mb-2"></Skeleton>
+            <Skeleton height="2vw" className="mb-2"></Skeleton>
+            <Skeleton width="10vw" height="4rem"></Skeleton>
+        </Dialog>
+    )
+
+    const platoDialog = (
+        <Dialog visible={!loading} onHide={() => parentOnClick(false)} header={plato.nombreReal} resizable={false} draggable={false} footer={renderFooter}
+        breakpoints={{'960px': '75vw', '640px': '100vw'}} style={{width: '25vw'}} >
+            <h4>Nombre en español: {plato.nombre} </h4>
+            <h4>English name: {plato.nombreEng} </h4>
+            <h4>Continente de origen: { capitalizeFirstLetter(plato.continente) } </h4>
+            <h4>Sabor principal: { capitalizeFirstLetter(plato.sabor) } </h4>
+            <h4>Temperatura: { capitalizeFirstLetter(plato.temperatura) } </h4>
+        </Dialog>
+    )
+
+    return(
+            <div>
+                {loading? skeletonDialog : platoDialog}
+            </div>
     )
 }
