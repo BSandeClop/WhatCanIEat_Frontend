@@ -1,14 +1,11 @@
 import React from 'react';
-import './App.css';
-import PlatoCard from "./components/PlatoCard";
+import './styles/App.css';
+import { Home } from './components/Templates/Home';
 
-
-function App() {
+export default function App() {
   return (
-    <div className="App w-screen h-screen">
-      <PlatoCard />      
-    </div>
+      <div className="App">
+        <Home />
+      </div>
   );
 }
-
-export default App;

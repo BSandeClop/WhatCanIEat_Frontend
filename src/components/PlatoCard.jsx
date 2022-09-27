@@ -3,7 +3,7 @@ import { Image } from 'primereact/image';
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 
-const PlatoCard = () => {
+export const PlatoCard = () => {
 
     const [displayBasic, setDisplayBasic] = useState(false);
     const dialogFuncMap = {
@@ -30,7 +30,7 @@ const PlatoCard = () => {
     const title = <span className='text-primary'>Titulo super ultra largo</span>
     
     return(
-        <div className='flex align-items-center justify-content-center h-screen'>
+        <div className='flex flex-grow-1 justify-content-center align-items-center'>
 
             <Button onClick={() => onClick("displayBasic")} label="Buscar plato aleatorio" icon="pi pi-search " />
             <Dialog visible={displayBasic} onHide={() => onHide("displayBasic")} header={title} resizable={false} draggable={false} footer={renderFooter()}>
@@ -39,5 +39,3 @@ const PlatoCard = () => {
         </div>
     )
 }
-
-export default PlatoCard;

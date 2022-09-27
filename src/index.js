@@ -1,19 +1,25 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './index.css';
+import './styles/index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import reportWebVitals from './js/reportWebVitals';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import "primereact/resources/themes/arya-green/theme.css";        //theme
 import "primereact/resources/primereact.min.css";                  //core css
 import "primeicons/primeicons.css";         //icons
-import "primeflex/primeflex.css";
- 
+import "primeflex/primeflex.css" 
+import { Admin } from './components/Templates/Admin';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element= {<App />} />
+        <Route path='/admin' element= {<Admin />} />
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>
 );
 
