@@ -20,6 +20,7 @@ export class PlatoService {
             }
         )
     }
+    
     addPlato(nombre, nombreReal, nombreEng, continente, sabor, temperatura) {
         return axios.post(
             "https://whatcanieat-backend.herokuapp.com/api/abm/platos",
@@ -33,6 +34,18 @@ export class PlatoService {
                     "temperatura": temperatura
                 }
             ],
+            {
+                headers: { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json", "Authorization": "Bearer " + localStorage.getItem('token') }
+            }
+        )
+    }
+
+    removePlato(idString){
+
+        const id = parseInt(idString);
+        
+        return axios.delete(
+            `https://whatcanieat-backend.herokuapp.com/api/abm/platos/${id}`,
             {
                 headers: { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json", "Authorization": "Bearer " + localStorage.getItem('token') }
             }

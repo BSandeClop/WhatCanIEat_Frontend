@@ -3,6 +3,7 @@ import axios from "axios";
 
 export const getJwt = (username, password) => {
     try {
+        localStorage.clear();
         const response = axios(
             {
                 url: "https://whatcanieat-backend.herokuapp.com/auth",

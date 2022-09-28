@@ -8,15 +8,14 @@ import { useForm, Controller } from 'react-hook-form';
 import { classNames } from 'primereact/utils';
 import { getJwt } from '../services/LoginService';
 import { ProgressSpinner } from 'primereact/progressspinner';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate} from 'react-router-dom';
 
 export const LoginCard = () => {
     
     const [displayBasic, setDisplayBasic] = useState(false);
-    const [formData, setFormData] = useState({});
     const [displayLoading, setDisplayLoading] = useState(false);
-    const [loggedIn, setLoggedIn] = useState(false);
     const [goAdmin, setGoAdmin] = useState(false);
+
     const toast = useRef(null);
 
     const dialogFuncMap = {
@@ -30,8 +29,6 @@ export const LoginCard = () => {
     const onHide = (name) => {
         dialogFuncMap[`${name}`](false);
     }
-
-
 
     const onSubmit = async (data) => { 
         try {

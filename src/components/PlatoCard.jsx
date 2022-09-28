@@ -40,7 +40,7 @@ export const PlatoCard = ({parentOnClick}) => {
 
     const skeletonDialog = (
         <Dialog visible={loading} resizable={false} closable={false} draggable={false} header={<Skeleton width='20rem' height='2rem' className='mr-3' ></Skeleton>}
-        breakpoints={{'960px': '75vw', '640px': '100vw'}} style={{width: '25vw'}}>
+        breakpoints={{'960px': '75vw', '640px': '100vw'}} style={{width: '35vw'}}>
             <Skeleton className="mb-2"></Skeleton>
             <Skeleton width="10vw" className="mb-2"></Skeleton>
             <Skeleton width="5vw" className="mb-2"></Skeleton>
@@ -51,7 +51,7 @@ export const PlatoCard = ({parentOnClick}) => {
 
     const platoDialog = (
         <Dialog visible={!loading} onHide={() => parentOnClick(false)} header={plato.nombreReal} resizable={false} draggable={false} footer={renderFooter}
-        breakpoints={{'960px': '75vw', '640px': '100vw'}} style={{width: '25vw'}} >
+        breakpoints={{'960px': '75vw', '640px': '100vw'}} style={{width: '35vw'}} >
             <h4>Nombre en español: {plato.nombre} </h4>
             <h4>English name: {plato.nombreEng} </h4>
             <h4>Continente de origen: { capitalizeFirstLetter(plato.continente) } </h4>
