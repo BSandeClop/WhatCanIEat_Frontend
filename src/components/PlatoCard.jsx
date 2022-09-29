@@ -48,7 +48,7 @@ export const PlatoCard = ({parentOnClick}) => {
     const skeletonHeader = <Skeleton width='20rem' height='2rem' className='mr-3 mb-4' ></Skeleton>
     
     const platoDialog = (
-        <Dialog visible={true} onHide={() => parentOnClick(false)} header={loading ? skeletonHeader : header} resizable={false} draggable={false} footer={renderFooter}
+        <Dialog visible={true} onHide={() => parentOnClick(false)} header={loading ? skeletonHeader : header} resizable={false} draggable={false} footer={!loading && renderFooter}
         breakpoints={{'960px': '75vw', '640px': '100vw'}} style={{width: '35vw'}} >
             {loading? skeletonRow : row('Nombre en español: ','nombre')}
             {loading? skeletonRow : row('English name: ','nombreEng')}
