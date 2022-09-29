@@ -19,7 +19,7 @@ export const AdminTable = () => {
     const [platos, setPlatos] = useState([]);
     const [globalFilter, setGlobalFilter] = useState(null);
     const [platoSeleccionado, setPlatoSeleccionado] = useState(null);
-    const [submitted, setSubmitted] = useState(false);
+    const [update, setUpdate] = useState(false);
     const [showNewPlatoDialog, setShowNewPlatoDialog] = useState(false);
     const [showDeletePlatoDialog, setShowDeletePlatoDialog] = useState(false);
     const [displayLoading, setDisplayLoading] = useState(false);
@@ -31,7 +31,7 @@ export const AdminTable = () => {
         platoService.getAllPlatos().then( res => setPlatos(res.data));
         setContinentes(["AFRICA","AMERICA","ASIA","EUROPA","OCEANIA"]);
         setSabores(["DULCE","SALADO","AMARGO","UMAMI","ACIDO"]);
-    }, [platos])
+    }, [update])
 
     const searchArea = (
         <div className="table-header flex justify-content-between">
@@ -59,6 +59,7 @@ export const AdminTable = () => {
             }
         } finally {
             setDisplayLoading(false);
+            setUpdate(!update);
         }
         reset();
     }
@@ -81,6 +82,7 @@ export const AdminTable = () => {
             }
         } finally {
             setDisplayLoading(false);
+            setUpdate(!update);
         }
     }
 
@@ -89,12 +91,10 @@ export const AdminTable = () => {
     }
 
     const mostrarNuevoCard = () => {
-        setSubmitted(false);
         setShowNewPlatoDialog(true);
     }
 
     const hideDialog = () => {
-        setSubmitted(false);
         setShowNewPlatoDialog(false);
         reset();
     }
@@ -122,7 +122,7 @@ export const AdminTable = () => {
     )
 
     return(
-        <div>
+        <div className="flex flex-column">
             <Toast ref={toast} />
             <Dialog visible={showNewPlatoDialog} style={{ width: '450px' }} modal={false} header="Nuevo Plato" className="p-fluid" onHide={() => {hideDialog()}} >
                 <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
@@ -197,7 +197,8 @@ export const AdminTable = () => {
 
             <div className="mt-5 mx-3">
                 <Toolbar className="mb-4" left={toolbarActions} right={searchArea}></Toolbar>
-                <DataTable value={platos} selectionMode="radiobutton" selection={platoSeleccionado} stripedRows onSelectionChange={e => setPlatoSeleccionado(e.value)} dataKey="id" responsiveLayout="scroll">
+                <DataTable value={platos} selectionMode="radiobutton" selection={platoSeleccionado} stripedRows onSelectionChange={e => setPlatoSeleccionado(e.value)} 
+                dataKey="id" responsiveLayout="scroll" globalFilter={globalFilter} paginator rows={10} rowsPerPageOptions={25} >
                     <Column selectionMode="single" headerStyle={{width: '3em'}}></Column>
                     <Column field="nombre" header="Nombre"></Column>
                     <Column field="nombreReal" header="Nombre Real"></Column>

@@ -8,25 +8,27 @@ export const PlatoCard = ({parentOnClick}) => {
 
     const [plato, setPlato] = useState({});
     const [loading, setLoading] = useState(false);
+    const [showPlato, setShowPlato] = useState(false);
+    const [update, setUpdate] = useState(false);
 
     useEffect(() => {
-
-        async function getPlato(){
-            setLoading(true);
-
-            const platoService = new PlatoService();
-            await platoService.getPlato().then( res => setPlato(res.data));
-
-            setLoading(false);
-        }
-
-        getPlato();
-    }, [])
+            async function getPlato(){
+                setShowPlato(false);
+                setLoading(true);
+    
+                const platoService = new PlatoService();
+                await platoService.getPlato().then( res => setPlato(res.data));
+    
+                setShowPlato(true);
+                setLoading(false);
+            }
+            getPlato();
+    }, [update])
 
     const renderFooter = () => {
         return (
             <div>
-                <Button label="Buscar otro" autoFocus />
+                <Button label="Buscar otro" onClick={() => setUpdate(!update)} />
             </div>
         );
     }
@@ -50,7 +52,7 @@ export const PlatoCard = ({parentOnClick}) => {
     )
 
     const platoDialog = (
-        <Dialog visible={!loading} onHide={() => parentOnClick(false)} header={plato.nombreReal} resizable={false} draggable={false} footer={renderFooter}
+        <Dialog visible={showPlato} onHide={() => parentOnClick(false)} header={plato.nombreReal} resizable={false} draggable={false} footer={renderFooter}
         breakpoints={{'960px': '75vw', '640px': '100vw'}} style={{width: '35vw'}} >
             <h4>Nombre en español: {plato.nombre} </h4>
             <h4>English name: {plato.nombreEng} </h4>
@@ -62,7 +64,8 @@ export const PlatoCard = ({parentOnClick}) => {
 
     return(
             <div>
-                {loading? skeletonDialog : platoDialog}
+                {skeletonDialog}
+                {platoDialog}
             </div>
     )
 }
