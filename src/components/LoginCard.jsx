@@ -63,7 +63,7 @@ export const LoginCard = () => {
             <Toast ref={toast} />
                 {goAdmin && <Navigate to="/admin" />}
                 <div className="flex justify-content-center">
-                <Button onClick={() => onClick("displayBasic")} icon="pi pi-key" label='Admin' className='p-button-secondary' />
+                <Button style={{fontFamily: 'Work Sans'}} onClick={() => onClick("displayBasic")} icon="pi pi-key" label='Admin' className='p-button-secondary' />
                 <Dialog header={title} visible={displayBasic} onHide={() => onHide("displayBasic")} resizable={false} draggable={false}>
                     <div className="card">
                         <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">

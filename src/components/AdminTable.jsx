@@ -198,7 +198,8 @@ export const AdminTable = () => {
             <div className="mt-5 mx-3">
                 <Toolbar className="mb-4" left={toolbarActions} right={searchArea}></Toolbar>
                 <DataTable value={platos} selectionMode="radiobutton" selection={platoSeleccionado} stripedRows onSelectionChange={e => setPlatoSeleccionado(e.value)} 
-                dataKey="id" responsiveLayout="scroll" globalFilter={globalFilter} paginator rows={10} rowsPerPageOptions={25} >
+                dataKey="id" responsiveLayout="scroll" globalFilter={globalFilter} paginator rows={10} rowsPerPageOptions={25} paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" 
+                currentPageReportTemplate="Mostrando {first}-{last} de {totalRecords} platos">
                     <Column selectionMode="single" headerStyle={{width: '3em'}}></Column>
                     <Column field="nombre" header="Nombre"></Column>
                     <Column field="nombreReal" header="Nombre Real"></Column>

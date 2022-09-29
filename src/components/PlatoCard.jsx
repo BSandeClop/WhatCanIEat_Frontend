@@ -27,7 +27,7 @@ export const PlatoCard = ({parentOnClick}) => {
 
     const renderFooter = () => {
         return (
-            <div>
+            <div className='scalein animation-ease-in animation-duration-1000'>
                 <Button label="Buscar otro" onClick={() => setUpdate(!update)} />
             </div>
         );
@@ -51,14 +51,16 @@ export const PlatoCard = ({parentOnClick}) => {
         </Dialog>
     )
 
+    const header = <a target={"_blank"} href={'https://www.google.com/search?q=' + plato.nombreReal}  style={{fontFamily: 'Kiwi Maru', textDecoration: 'none'} } className='text-primary font-medium text-6xl'>{plato.nombreReal}</a>
+
     const platoDialog = (
-        <Dialog visible={showPlato} onHide={() => parentOnClick(false)} header={plato.nombreReal} resizable={false} draggable={false} footer={renderFooter}
+        <Dialog visible={showPlato} onHide={() => parentOnClick(false)} header={header} resizable={false} draggable={false} footer={renderFooter}
         breakpoints={{'960px': '75vw', '640px': '100vw'}} style={{width: '35vw'}} >
-            <h4>Nombre en español: {plato.nombre} </h4>
-            <h4>English name: {plato.nombreEng} </h4>
-            <h4>Continente de origen: { capitalizeFirstLetter(plato.continente) } </h4>
-            <h4>Sabor principal: { capitalizeFirstLetter(plato.sabor) } </h4>
-            <h4>Temperatura: { capitalizeFirstLetter(plato.temperatura) } </h4>
+            <p style={{fontFamily: 'Work Sans'}} className='text-color'>Nombre en español: <span className='text-color-secondary'>{plato.nombre}</span></p>
+            <p style={{fontFamily: 'Work Sans'}} className='text-color'>English name: <span className='text-color-secondary'>{plato.nombreEng}</span></p>
+            <p style={{fontFamily: 'Work Sans'}} className='text-color'>Continente de origen: <span className='text-color-secondary'>{ capitalizeFirstLetter(plato.continente) }</span></p>
+            <p style={{fontFamily: 'Work Sans'}} className='text-color'>Sabor principal: <span className='text-color-secondary'>{ capitalizeFirstLetter(plato.sabor) }</span></p>
+            <p style={{fontFamily: 'Work Sans'}} className='text-color'>Temperatura: <span className='text-color-secondary'>{ capitalizeFirstLetter(plato.temperatura) }</span></p>
         </Dialog>
     )
 

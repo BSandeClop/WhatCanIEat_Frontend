@@ -25,7 +25,7 @@ export const Navbar = ({inHome, inAdmin}) => {
 
     const botones = (
         <div className='flex'>
-            {displayVolver  && <Button label='Volver' onClick={() => onClick("goHome")} className='mr-3' /> }
+            {displayVolver  && <Button style={{fontFamily: 'Work Sans'}} label='Volver' onClick={() => onClick("goHome")} className='mr-3' /> }
             {displayLogin && <LoginCard />}
         </div>
     )

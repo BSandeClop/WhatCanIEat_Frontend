@@ -18,7 +18,7 @@ export const Home = () => {
          <div className='flex flex-column min-h-screen'>
             <Navbar inHome={true} inAdmin={false} />
             <div className='flex flex-grow-1 justify-content-center align-items-center'>
-              <Button onClick={() => onClick(true)} label="Buscar plato aleatorio" icon="pi pi-search " />
+              <Button style={{fontFamily: 'Work Sans'}} onClick={() => onClick(true)} label="Buscar plato aleatorio" icon="pi pi-search " />
             </div>
           </div>
           { displayCard && <PlatoCard parentOnClick={onClick} /> }
